@@ -9,12 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Calendar Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Calendar Demo Home Page'),
     );
   }
 }
@@ -29,22 +29,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  // 라이브러리 클래스 호출
-  Calculator test = Calculator();
-
   @override
   void initState() {
     super.initState();
   }
-
-  void _incrementCounter() {
-    setState(() {
-      // 라이브러리 매소드 사용
-      _counter = test.addOne(_counter);
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
