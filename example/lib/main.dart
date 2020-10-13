@@ -29,9 +29,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  CalendarController _calendarController;
+
   @override
   void initState() {
     super.initState();
+    _calendarController = CalendarController();
   }
 
   @override
@@ -50,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildCalendar() {
-    return WidgetableCalendar();
+    return WidgetableCalendar(
+//      calendarController: _calendarController,
+//      initialSelectedDay: DateTime.now(),
+    );
   }
 }

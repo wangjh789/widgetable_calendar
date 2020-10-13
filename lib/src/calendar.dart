@@ -1,11 +1,15 @@
 part of widgetable_calendar;
 
+typedef void OnCalendarCreated(DateTime first, DateTime last);
+
 class WidgetableCalendar extends StatefulWidget {
-//  final DateTime selectDate;
+//  final CalendarController calendarController;
+//  final DateTime initialSelectedDay;
 
   WidgetableCalendar({
     Key key,
-//    this.selectDate,
+//    @required this.calendarController,
+//    this.initialSelectedDay,
   });
 
   _WidgetableCalendarState createState() => _WidgetableCalendarState();
