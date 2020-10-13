@@ -29,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: WidgetableCalendar(holidays: [],backgroundColor: Colors.greenAccent,),
+        child: WidgetableCalendar(
+          holidays: [],
+          backgroundColor: Colors.greenAccent,
+          height: MediaQuery.of(context).size.height * 0.5,
+          width: MediaQuery.of(context).size.width,
+        ),
       ),
     );
   }
