@@ -6,4 +6,5 @@ class DefaultFontSize {
   static const double monthFontSize = 11;
   static const double dateFontSize = 11;
 
+
 }

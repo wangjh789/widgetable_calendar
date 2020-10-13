@@ -4,6 +4,7 @@ class DefaultColor{
 
   DefaultColor._();
 
+
   static const Color monthColor = Colors.black;
   static const Color dayColor = Colors.black;
   static const Color dateColor = Colors.black;
