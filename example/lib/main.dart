@@ -10,11 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Widgetable Calendar Example',
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Widgetable Calendar Example'),
+
     );
   }
 }
@@ -29,10 +31,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+//  CalendarController _calendarController;
 
   @override
   void initState() {
     super.initState();
+//    _calendarController = CalendarController();
+
   }
 
   @override
@@ -41,9 +46,20 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: WidgetableCalendar(holidays: [],backgroundColor: Colors.greenAccent,),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          _buildCalendar(),
+        ],
       ),
+    );
+  }
+
+  Widget _buildCalendar() {
+    return WidgetableCalendar(
+//      calendarController: _calendarController,
+//      initialSelectedDay: DateTime.now(),
+
     );
   }
 }
