@@ -33,6 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
   // 라이브러리 클래스 호출
   Calculator test = Calculator();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void _incrementCounter() {
     setState(() {
       // 라이브러리 매소드 사용
@@ -47,25 +52,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          _buildCalendar(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget _buildCalendar() {
+    return WidgetableCalendar();
   }
 }
