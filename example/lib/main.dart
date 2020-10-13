@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+//    _calendarController = CalendarController();
   }
 
   @override
@@ -40,14 +41,32 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: WidgetableCalendar(
-          holidays: [],
-          backgroundColor: Colors.greenAccent,
-          height: MediaQuery.of(context).size.height * 0.5,
-          width: MediaQuery.of(context).size.width,
-        ),
+// <<<<<<< HEAD
+//       body: Center(
+//         child: WidgetableCalendar(
+//           holidays: [],
+//           backgroundColor: Colors.greenAccent,
+//           height: MediaQuery.of(context).size.height * 0.5,
+//           width: MediaQuery.of(context).size.width,
+//         ),
+// =======
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          _buildCalendar(),
+        ],
       ),
+    );
+  }
+
+  Widget _buildCalendar() {
+    return WidgetableCalendar(
+      holidays: [],
+      saturdayColor: Colors.green,
+weekDayColor: Colors.purple,
+
+//      calendarController: _calendarController,
+//      initialSelectedDay: DateTime.now(),
     );
   }
 }
