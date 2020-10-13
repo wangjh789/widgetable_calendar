@@ -81,13 +81,26 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
   @override
   Widget build(BuildContext context) {
     return ClipRect(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _buildHeader(),
-          _buildCalendarContent(),
-          _buildTodayButton(),
-        ],
+      child: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          if(details.primaryDelta < -30){
+            changeMonth(1);
+          }
+          if(details.primaryDelta > 30){
+            changeMonth(-1);
+          }
+        },
+        child: Container(
+          color: widget.backgroundColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildHeader(),
+              _buildCalendarContent(),
+              _buildTodayButton(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -113,13 +126,7 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
       IconButton(
         icon: Icon(Icons.arrow_back_ios),
         onPressed: () {
-          setState(() {
-            selectDate = DateTime(selectDate.year, selectDate.month - 1, 1);
-            firstDay = DateTime(selectDate.year, selectDate.month, 1);
-            lastDay = DateTime(selectDate.year, selectDate.month + 1, 1)
-                .subtract(new Duration(days: 1));
-            weekList = _makeWeekList(firstDay, lastDay);
-          });
+          changeMonth(-1);
         },
       ),
       Expanded(
@@ -133,13 +140,7 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
       IconButton(
         icon: Icon(Icons.arrow_forward_ios),
         onPressed: () {
-          setState(() {
-            selectDate = DateTime(selectDate.year, selectDate.month + 1, 1);
-            firstDay = DateTime(selectDate.year, selectDate.month, 1);
-            lastDay = DateTime(selectDate.year, selectDate.month + 1, 1)
-                .subtract(new Duration(days: 1));
-            weekList = _makeWeekList(firstDay, lastDay);
-          });
+          changeMonth(1);
         },
       ),
     ];
@@ -159,11 +160,8 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
       children.add(_buildEachWeek(weekList[i]));
     }
 
-    return Container(
-      color: widget.backgroundColor,
-      child: Table(
-        children: children,
-      ),
+    return Table(
+      children: children,
     );
   }
 
@@ -289,4 +287,17 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
       ),
     );
   }
+
+  void changeMonth(int i){
+    print(i);
+    setState(() {
+      selectDate = DateTime(selectDate.year, selectDate.month + i, 1);
+      firstDay = DateTime(selectDate.year, selectDate.month, 1);
+      lastDay = DateTime(selectDate.year, selectDate.month + 1, 1)
+          .subtract(new Duration(days: 1));
+      weekList = _makeWeekList(firstDay, lastDay);
+    });
+  }
+
+    // sleep(Duration(seconds: 1));
 }

@@ -63,7 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return WidgetableCalendar(
       holidays: [],
       saturdayColor: Colors.green,
-weekDayColor: Colors.purple,
+      weekDayColor: Colors.purple,
+      backgroundColor: Colors.white.withOpacity(0),
 
 //      calendarController: _calendarController,
 //      initialSelectedDay: DateTime.now(),
