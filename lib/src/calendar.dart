@@ -124,6 +124,10 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
               _buildHeader(),
               _buildCalendarContent(),
               _buildTodayButton(),
+              Container(
+                height: 30,
+                color: Colors.black,
+              )
             ],
           ),
         ),
@@ -235,54 +239,52 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
 
     for (int i = 0; i < weekList.length; i++) {
       String date = weekList[i] != 0 ? weekList[i].toString() : "";
-      print(date);
       children.add(
-        _isToday(weekList[i])
-            ? TableCell(
-                child: Container(
-                width: double.infinity,
-                height: 50,
-                color: Colors.grey[300],
-                child: Center(
-                    child: i == 0
-                        ? Text(
-                            date,
-                            style: TextStyle(color: widget.sundayColor),
-                          )
-                        : i == 6
-                            ? Text(
-                                date,
-                                style: TextStyle(color: widget.saturdayColor),
-                              )
-                            : Text(
-                                date,
-                                style: TextStyle(color: widget.weekDayColor),
-                              )),
-
-//                    child: Text(date)),
-              ))
-            : TableCell(
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: Center(
+        TableCell(
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                if (widget.calendarController.isSelectedDate(
+                    DateTime(focusDate.year, focusDate.month, weekList[i])))
+                  widget.calendarController.setSelectDate(null, [], []);
+                else
+                  widget.calendarController.setSelectDate(
+                      DateTime(focusDate.year, focusDate.month, weekList[i]),
+                      widget.calendarController
+                          .events[widget.calendarController.selectDate],
+                      widget.calendarController
+                          .holidays[widget.calendarController.selectDate]);
+              });
+            },
+            child: Container(
+              width: double.infinity,
+              color: _isToday(weekList[i])
+                  ? Colors.grey[300]
+                  : widget.calendarController.isSelectedDate(
+                      DateTime(focusDate.year, focusDate.month, weekList[i]),
+                    )
+                      ? Colors.red
+                      : null,
+              height: 50,
+              child: Center(
 //                    child: Text(date)
-                      child: i == 0
+                  child: i == 0
+                      ? Text(
+                          date,
+                          style: TextStyle(color: widget.sundayColor),
+                        )
+                      : i == 6
                           ? Text(
                               date,
-                              style: TextStyle(color: widget.sundayColor),
+                              style: TextStyle(color: widget.saturdayColor),
                             )
-                          : i == 6
-                              ? Text(
-                                  date,
-                                  style: TextStyle(color: widget.saturdayColor),
-                                )
-                              : Text(
-                                  date,
-                                  style: TextStyle(color: widget.weekDayColor),
-                                )),
-                ),
-              ),
+                          : Text(
+                              date,
+                              style: TextStyle(color: widget.weekDayColor),
+                            )),
+            ),
+          ),
+        ),
       );
     }
 
@@ -296,11 +298,10 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
           child: Text("Today"),
           onPressed: () {
             setState(() {
-              focusDate = DateTime.now();
-              firstDay = DateTime(focusDate.year,
-                  focusDate.month, 1);
-              lastDay = DateTime(focusDate.year,
-                  focusDate.month + 1, 1)
+              focusDate =
+                  widget.calendarController._normalizeDate(DateTime.now());
+              firstDay = DateTime(focusDate.year, focusDate.month, 1);
+              lastDay = DateTime(focusDate.year, focusDate.month + 1, 1)
                   .subtract(new Duration(days: 1));
               weekList = _makeWeekList(firstDay, lastDay);
             });
@@ -326,8 +327,6 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
           .subtract(new Duration(days: 1));
       weekList = _makeWeekList(firstDay, lastDay);
     });
-    print(focusDate.toString());
-    print(widget.calendarController.selectDate.toString());
   }
 
 // sleep(Duration(seconds: 1));

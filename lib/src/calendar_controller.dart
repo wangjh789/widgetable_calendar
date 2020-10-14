@@ -43,14 +43,18 @@ class CalendarController {
   }
 
   DateTime _normalizeDate(DateTime value) {
-    return DateTime.utc(value.year, value.month, value.day, 12);
+    return DateTime.utc(value.year, value.month, value.day, 0);
   }
 
-  setSelectDate(DateTime day,List events,List holidays){
+  void setSelectDate(DateTime day,List events,List holidays){
     _selectDate = day;
     if(_selectedDayCallback != null){
       _selectedDayCallback(day,events,holidays);
     }
+  }
+
+  bool isSelectedDate(DateTime day){
+    return day==_selectDate;
   }
 //  onClickToday(){
 //    _selectDate = DateTime.now();
