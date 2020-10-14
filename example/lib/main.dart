@@ -28,11 +28,14 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+
+  CalendarController _calendarController;
+
   @override
   void initState() {
     super.initState();
-//    _calendarController = CalendarController();
+    _calendarController = CalendarController();
   }
 
   @override
@@ -61,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildCalendar() {
     return WidgetableCalendar(
-      holidays: [],
+      calendarController: _calendarController,
       saturdayColor: Colors.green,
       weekDayColor: Colors.purple,
       backgroundColor: Colors.white.withOpacity(0),
