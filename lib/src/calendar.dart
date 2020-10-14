@@ -1,7 +1,8 @@
 part of widgetable_calendar;
 
 typedef void OnCalendarCreated(DateTime first, DateTime last);
-typedef void OnDaySelected(DateTime day, List events, List holidays);
+//typedef void OnDaySelected(DateTime day, List events, List holidays);
+typedef void OnDaySelected(DateTime day);
 
 class WidgetableCalendar extends StatefulWidget {
   final CalendarController calendarController;
@@ -250,8 +251,9 @@ class _WidgetableCalendarState extends State<WidgetableCalendar>
                 setState(() {
                   selectDate =
                       DateTime(focusDate.year, focusDate.month, dateInt);
+                  widget.calendarController.setSelectDate(selectDate);
                 });
-                print("selectDate: "+selectDate.toString());
+                print("selectDate: "+ selectDate.toString());
               },
               child: Center(
 //                    child: Text(date)

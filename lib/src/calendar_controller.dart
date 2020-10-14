@@ -1,6 +1,7 @@
 part of widgetable_calendar;
 
-typedef void _SelectedDayCallback(DateTime day,List events,List holidays);
+//typedef void _SelectedDayCallback(DateTime day,List events,List holidays);
+typedef void _SelectedDayCallback(DateTime day);
 
 class CalendarController {
   /// init(), dispose(), isSelected() -> when click specific day, ......
@@ -46,10 +47,11 @@ class CalendarController {
     return DateTime.utc(value.year, value.month, value.day, 12);
   }
 
-  setSelectDate(DateTime day,List events,List holidays){
+  setSelectDate(DateTime day,{List events,List holidays}){
     _selectDate = day;
     if(_selectedDayCallback != null){
-      _selectedDayCallback(day,events,holidays);
+//      _selectedDayCallback(day,events,holidays);
+      _selectedDayCallback(day);
     }
   }
 //  onClickToday(){
